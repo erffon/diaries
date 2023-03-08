@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Header from "@/features/Header";
 import ARTICLES from "../mockdata/articles";
+import { HiChevronLeft } from "react-icons/hi2";
+import { HiFire } from "react-icons/hi";
 
 export default function Home() {
   return (
@@ -14,7 +16,9 @@ export default function Home() {
       <Header />
       <div className="mx-10 w-auto pb-16 flex justify-between">
         <main className=" w-3/5">
-          <h2 className="font-bold text-slate-500 rounded-lg mb-5 py-3 px-3 bg-indigo-100">
+          <h2 className="font-bold text-slate-500 rounded-lg mb-5 py-3 px-3 bg-indigo-100 flex gap-2 items-center">
+            {" "}
+            <HiFire className="text-xl" />
             آخرین نوشته‌ها
           </h2>
           <ul>
@@ -22,7 +26,7 @@ export default function Home() {
               return (
                 <li
                   key={item.id}
-                  className="border-b pb-7 px-3 hover:scale-105 transition duration-300 ease-out hover:cursor-pointer"
+                  className="border-b pb-7 px-3 hover:cursor-pointer"
                 >
                   <h3 className="font-semibold my-2 text-neutral-500">
                     {item.title}
@@ -34,8 +38,8 @@ export default function Home() {
               );
             })}
           </ul>
-          <button className="bg-slate-200 px-3 py-1.5 mt-3 text-gray-600 rounded-lg hover:scale-95 transition duration-200 ease-out text-sm">
-            مشاهده همه
+          <button className="bg-slate-200 px-3 py-2 mt-3 text-gray-600 rounded-lg hover:scale-95 transition duration-200 ease-out text-sm flex gap-3 items-center">
+            مشاهده همه <HiChevronLeft />
           </button>
         </main>
         <aside className="w-1/3 h-2/3"></aside>
