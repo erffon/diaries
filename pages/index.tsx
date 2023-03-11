@@ -3,6 +3,7 @@ import Header from "@/features/Header";
 import ARTICLES from "../mockdata/articles";
 import { HiChevronLeft } from "react-icons/hi2";
 import { HiFire } from "react-icons/hi";
+import { BiPurchaseTagAlt } from "react-icons/bi";
 import style from "./Homepage.module.css";
 
 export default function Home() {
@@ -35,9 +36,12 @@ export default function Home() {
                   <p className="mb-3 text-neutral-400 font-light text-sm">
                     {item.body.substring(0, 200)}
                   </p>
-                  <button className={style.tags}>تگ اول</button>
-                  <button className={style.tags}>تگ دوم</button>
-                  <button className={style.tags}>تگ سوم</button>
+                  <div className="flex items-center gap-3">
+                    <BiPurchaseTagAlt className="text-neutral-400" />
+                    <button className={style.tags}>تگ اول</button>
+                    <button className={style.tags}>تگ دوم</button>
+                    <button className={style.tags}>تگ سوم</button>
+                  </div>
                 </li>
               );
             })}
