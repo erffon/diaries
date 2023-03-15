@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import style from "./Header.module.css";
 
 const Header = () => {
@@ -13,7 +14,9 @@ const Header = () => {
       />
       <h1 className={style.title}>دفترچه خاطرات من</h1>
       <ul className={style.uls}>
-        <li className={style.lis}>خانه</li>
+        <Link href="/">
+          <li className={style.lis}>خانه</li>
+        </Link>
         <li className={style.lis}>دسته‌بندی</li>
       </ul>
     </header>
