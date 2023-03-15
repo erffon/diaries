@@ -17,7 +17,6 @@ export default function Home({
   data: PostsType;
   status: any;
 }) {
-  console.log("🚀 ~ POSTS:", POSTS);
   return (
     <>
       <Head>
@@ -38,7 +37,7 @@ export default function Home({
             {status === 200 &&
               POSTS.reverse().map((item) => {
                 return (
-                  <Link href={`${Routes.HOME}article/${item?.id}`}>
+                  <Link href={`${Routes.HOME}post/${item?.id}`}>
                     <li key={item?.id} className="border-b pb-7 px-3">
                       <h3 className="font-semibold my-2 text-neutral-600">
                         {item?.attributes?.title}
