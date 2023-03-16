@@ -1,37 +1,62 @@
 import Header from "@/features/Header";
-import { useRouter } from "next/router";
 import style from "./Post.module.css";
+import { GetStaticPaths, GetStaticProps } from "next";
+import axios from "axios";
+import { apiRoutes } from "@/constants/api-routes";
+import { PostsType } from "@/interfaces/posts";
 
-const Article = () => {
-  const {
-    query: { articleId },
-  } = useRouter();
+interface PostData {
+  id: number;
+  attributes: {
+    title: string;
+    description: string;
+    tag: string;
+    slug: string;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt: Date;
+  };
+}
 
+const Article = ({ postData }: { postData: PostData }) => {
   return (
     <>
       <Header />
       <main className="font-salel h-screen">
-        <h2 className={style.title}>title of the post</h2>
+        <h2 className={style.title}>{postData?.attributes?.title}</h2>
         <div className={style["post-metadata"]}>
-          <button>tag</button>
-          <p>20 march 2023</p>
+          <button>{postData?.attributes?.tag}</button>
+          <p>{postData?.attributes?.updatedAt.toString()}</p>
         </div>
-        <p className={style.description}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis
-          corporis minus porro assumenda ab, mollitia blanditiis sint quidem,
-          doloremque illum molestias dicta, laboriosam aliquid maxime unde
-          corrupti! Reprehenderit, iusto quae! Lorem ipsum dolor sit amet
-          consectetur, adipisicing elit. Perferendis corporis minus porro
-          assumenda ab, mollitia blanditiis sint quidem, doloremque illum
-          molestias dicta, laboriosam aliquid maxime unde corrupti!
-          Reprehenderit, iusto quae! Lorem ipsum dolor sit amet consectetur,
-          adipisicing elit. Perferendis corporis minus porro assumenda ab,
-          mollitia blanditiis sint quidem, doloremque illum molestias dicta,
-          laboriosam aliquid maxime unde corrupti! Reprehenderit, iusto quae!
-        </p>
+        <p className={style.description}>{postData?.attributes?.description}</p>
       </main>
     </>
   );
 };
 
 export default Article;
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { data } = await axios.get<PostsType>(
+    `${apiRoutes.ALL_POSTS}${params?.id}`
+  );
+
+  return {
+    props: {
+      postData: data.data,
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async (ctx) => {
+  const { data } = await axios.get<PostsType>(apiRoutes.ALL_POSTS);
+
+  const paths = data?.data.map((item) => {
+    return { params: { id: item.id.toString() } };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
