@@ -6,6 +6,7 @@ import { apiRoutes } from "@/constants/api-routes";
 import { PostsType } from "@/interfaces/posts";
 import MarkdownIt from "markdown-it";
 import { BiPurchaseTagAlt } from "react-icons/bi";
+import { useEffect, useState } from "react";
 
 interface PostData {
   id: number;
@@ -35,8 +36,12 @@ const monthNames = [
 ];
 
 const Article = ({ postData }: { postData: PostData }) => {
-  const md = new MarkdownIt();
-  const postDescription = md.render(postData?.attributes?.description);
+  const [postDesc, setPostDesc] = useState("");
+  useEffect(() => {
+    const md = new MarkdownIt();
+    const postDescription = md.render(postData?.attributes?.description);
+    setPostDesc(postDescription);
+  }, []);
 
   const postRawTime = postData?.attributes?.updatedAt.toString();
   const time = new Date(postRawTime);
@@ -61,7 +66,7 @@ const Article = ({ postData }: { postData: PostData }) => {
         </div>
         <p
           className={style.description}
-          dangerouslySetInnerHTML={{ __html: postDescription }}
+          dangerouslySetInnerHTML={{ __html: postDesc }}
         ></p>
       </main>
     </>
