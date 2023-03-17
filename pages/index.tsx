@@ -37,22 +37,22 @@ export default function Home({
             {status === 200 &&
               POSTS.reverse().map((item) => {
                 return (
-                  <Link href={`${Routes.HOME}post/${item?.id}`}>
-                    <li key={item?.id} className="border-b pb-7 px-3">
+                  <li key={item?.id} className="border-b pb-7 px-3">
+                    <Link href={`${Routes.HOME}post/${item?.id}`}>
                       <h3 className="font-semibold my-2 text-neutral-600">
                         {item?.attributes?.title}
                       </h3>
                       <p className="mb-3 text-neutral-500 font-light text-sm">
                         {item?.attributes?.description.substring(0, 200)}
                       </p>
-                      <div className="flex items-center gap-3">
-                        <BiPurchaseTagAlt className="text-neutral-400" />
-                        <button className={style.tags}>
-                          {item?.attributes?.tag}
-                        </button>
-                      </div>
-                    </li>
-                  </Link>
+                    </Link>
+                    <div className="flex items-center gap-3">
+                      <BiPurchaseTagAlt className="text-neutral-400" />
+                      <button className={style.tags}>
+                        {item?.attributes?.tag}
+                      </button>
+                    </div>
+                  </li>
                 );
               })}
           </ul>

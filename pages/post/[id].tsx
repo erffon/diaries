@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import axios from "axios";
 import { apiRoutes } from "@/constants/api-routes";
 import { PostsType } from "@/interfaces/posts";
+import MarkdownIt from "markdown-it";
 
 interface PostData {
   id: number;
@@ -19,6 +20,8 @@ interface PostData {
 }
 
 const Article = ({ postData }: { postData: PostData }) => {
+  const md = new MarkdownIt();
+  const postDescription = md.render(postData?.attributes?.description);
   return (
     <>
       <Header />
@@ -28,7 +31,10 @@ const Article = ({ postData }: { postData: PostData }) => {
           <button>{postData?.attributes?.tag}</button>
           <p>{postData?.attributes?.updatedAt.toString()}</p>
         </div>
-        <p className={style.description}>{postData?.attributes?.description}</p>
+        <p
+          className={style.description}
+          dangerouslySetInnerHTML={{ __html: postDescription }}
+        ></p>
       </main>
     </>
   );
