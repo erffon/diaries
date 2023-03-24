@@ -9,13 +9,17 @@ import { apiRoutes } from "@/constants/api-routes";
 import { PostsType } from "@/interfaces/posts";
 import Link from "next/link";
 import { Routes } from "@/constants/app-routes";
+import { AllCatType } from "@/interfaces/categories";
+import { TbCategory2 } from "react-icons/tb";
 
 export default function Home({
   data: { data: POSTS },
   status,
+  catData,
 }: {
   data: PostsType;
   status: any;
+  catData: AllCatType;
 }) {
   return (
     <>
@@ -35,29 +39,45 @@ export default function Home({
           </h2>
           <ul>
             {status === 200 &&
-              POSTS.reverse().map((item) => {
-                return (
-                  <li key={item?.id} className="border-b pb-7 px-3">
-                    <Link href={`${Routes.HOME}post/${item?.id}`}>
-                      <h3 className="font-semibold my-2 text-neutral-600">
-                        {item?.attributes?.title}
-                      </h3>
-                      <p className="mb-3 text-neutral-500 font-light text-sm">
-                        {item?.attributes?.description.substring(0, 200)}
-                      </p>
-                    </Link>
-                    <div className="flex items-center gap-3">
-                      <BiPurchaseTagAlt className="text-neutral-400" />
-                      <button className={style.tags}>
-                        {item?.attributes?.tag}
-                      </button>
-                    </div>
-                  </li>
-                );
-              })}
+              POSTS.reverse()
+                .slice(0, 3)
+                .map((item) => {
+                  return (
+                    <li key={item?.id} className="border-b pb-7 px-3">
+                      <Link href={`${Routes.HOME}post/${item?.id}`}>
+                        <h3 className="font-semibold my-2 text-neutral-600">
+                          {item?.attributes?.title}
+                        </h3>
+                        <p className="mb-3 text-neutral-500 font-light text-sm">
+                          {item?.attributes?.description.substring(0, 200)}
+                        </p>
+                      </Link>
+                      <div className="flex items-center gap-3">
+                        <BiPurchaseTagAlt className="text-neutral-400" />
+                        <button className={style.tags}>
+                          {item?.attributes?.tag}
+                        </button>
+                      </div>
+                    </li>
+                  );
+                })}
           </ul>
         </main>
-        <aside className="w-1/3 h-2/3"></aside>
+        <aside className="w-1/3">
+          <h2 className="font-bold text-slate-500 rounded-lg mb-5 py-3 px-3 bg-indigo-100 flex gap-2 items-center">
+            {" "}
+            <TbCategory2 className="text-xl" /> دسته بندی ها
+          </h2>
+          <div className="flex flex-wrap justify-between">
+            {catData?.data.map((item) => {
+              return (
+                <button key={item.id} className={style["cat-buttons"]}>
+                  {item?.attributes?.name}
+                </button>
+              );
+            })}
+          </div>
+        </aside>
       </div>
     </>
   );
@@ -65,11 +85,13 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async () => {
   let { data, status } = await axios.get<PostsType>(apiRoutes.ALL_POSTS);
+  let { data: catData } = await axios.get<AllCatType>(apiRoutes.ALL_CATEGORIES);
 
   return {
     props: {
       data,
       status,
+      catData,
     },
   };
 };
