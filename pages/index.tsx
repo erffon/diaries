@@ -60,7 +60,7 @@ export default function Home({
           </h2>
           <ul>
             {status === 200 &&
-              searched
+              (searched.length != 0 ? searched : POSTS)
                 .reverse()
                 .slice(0, 3)
                 .map((item) => {
