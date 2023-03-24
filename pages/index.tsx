@@ -93,9 +93,13 @@ export default function Home({
           <div className="flex flex-wrap justify-between">
             {catData?.data.map((item) => {
               return (
-                <button key={item.id} className={style["cat-buttons"]}>
-                  {item?.attributes?.name}
-                </button>
+                <Link
+                  href={`/categories/${item.id}?name=${item.attributes.name}`}
+                >
+                  <button key={item.id} className={style["cat-buttons"]}>
+                    {item?.attributes?.name}
+                  </button>
+                </Link>
               );
             })}
           </div>

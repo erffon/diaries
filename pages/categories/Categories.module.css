@@ -1,0 +1,3 @@
+.title {
+  @apply font-bold text-xl text-center text-cyan-600 bg-slate-200 mx-10 rounded-xl py-5 mb-10;
+}
