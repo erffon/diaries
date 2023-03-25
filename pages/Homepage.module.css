@@ -2,5 +2,8 @@
   @apply text-xs bg-neutral-200 hover:bg-neutral-300 text-neutral-700 hover:text-neutral-900 transition duration-300 ease-out hover:scale-95 rounded-md px-4 py-1;
 }
 .cat-buttons {
-  @apply bg-slate-50 hover:bg-slate-100 border-2 hover:border-slate-700 text-neutral-700 hover:font-semibold w-16 h-16 mb-4 rounded-xl;
+  @apply bg-slate-50 hover:bg-slate-100 border-2 hover:border-slate-700 text-neutral-500 hover:font-semibold hover:text-neutral-600 w-16 h-16 mb-4 rounded-xl transition-all duration-300 ease-out;
+}
+.searchbar {
+  @apply py-2 pl-24 pr-5 rounded-lg border-b-4 hover:border-slate-700 hover:bg-slate-100 bg-slate-50 transition-all duration-300 ease-out border-t-2 border-r-2 border-l-2;
 }

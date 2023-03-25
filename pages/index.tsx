@@ -10,7 +10,7 @@ import { Datum, PostsType } from "@/interfaces/posts";
 import Link from "next/link";
 import { Routes } from "@/constants/app-routes";
 import { AllCatType } from "@/interfaces/categories";
-import { TbCategory2 } from "react-icons/tb";
+import { TbCategory2, TbInputSearch } from "react-icons/tb";
 import { ChangeEvent, EventHandler, useState } from "react";
 
 export default function Home({
@@ -79,7 +79,7 @@ export default function Home({
             {" "}
             <TbCategory2 className="text-xl" /> دسته بندی ها
           </h2>
-          <div className="flex flex-wrap justify-between">
+          <div className="flex flex-wrap justify-between border-b pb-5">
             {catData?.data.map((item) => {
               return (
                 <Link
@@ -93,11 +93,16 @@ export default function Home({
             })}
           </div>
           {/* /* -------------------------------- searchbar -------------------------------  */}
-          <div className="flex justify-start mt-5">
+          <h2 className="font-bold text-slate-500 rounded-lg mb-2 mt-8 py-3 px-3 bg-indigo-100 flex gap-2 items-center">
+            {" "}
+            <TbInputSearch className="text-xl" />
+            جستجو
+          </h2>
+          <div className="flex justify-start border-b pb-10">
             <input
               type="text"
-              placeholder="جستجو ..."
-              className="py-2 px-16 rounded-lg border-b-4 hover:border-black/20 transition-all duration-300 ease-out"
+              placeholder="عنوان پست ..."
+              className={style.searchbar}
               onChange={searchHandler}
             />
           </div>
