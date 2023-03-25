@@ -40,17 +40,6 @@ export default function Home({
         <link rel="icon" href="/myfavicon.ico" />
       </Head>
       <Header />
-      <div className="-mt-2 mx-10">
-        <div className="pb-5 flex items-center">
-          <input
-            type="text"
-            placeholder="جستجو ..."
-            className="py-2 px-5 rounded-r-lg"
-            onChange={searchHandler}
-          />
-          <BiSearch className="text-white bg-slate-600 w-10 h-10 flex justify-center p-2 rounded-l-lg" />
-        </div>
-      </div>
       <div className="mx-10 w-auto pb-16 flex justify-between">
         <main className=" w-3/5">
           <h2 className="font-bold text-slate-500 rounded-lg mb-5 py-3 px-3 bg-indigo-100 flex gap-2 items-center">
@@ -102,6 +91,15 @@ export default function Home({
                 </Link>
               );
             })}
+          </div>
+          {/* /* -------------------------------- searchbar -------------------------------  */}
+          <div className="flex justify-start mt-5">
+            <input
+              type="text"
+              placeholder="جستجو ..."
+              className="py-2 px-16 rounded-lg border-b-4 hover:border-black/20 transition-all duration-300 ease-out"
+              onChange={searchHandler}
+            />
           </div>
         </aside>
       </div>
