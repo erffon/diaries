@@ -122,5 +122,6 @@ export const getStaticProps: GetStaticProps = async () => {
       status,
       catData,
     },
+    revalidate: 600,
   };
 };

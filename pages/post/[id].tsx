@@ -18,6 +18,15 @@ interface PostData {
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date;
+    categories: {
+      id: number;
+      category_attributes: {
+        name: string;
+        createdAt: Date;
+        updatedAt: Date;
+        publishedAt: Date;
+      };
+    };
   };
 }
 const monthNames = [
@@ -77,7 +86,7 @@ export default Article;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await axios.get<PostsType>(
-    `${apiRoutes.ALL_POSTS}${params?.id}`
+    `${apiRoutes.ALL_POSTS}${params?.id}?populate=*`
   );
 
   return {
