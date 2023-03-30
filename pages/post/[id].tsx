@@ -84,7 +84,7 @@ const Article = ({ postData }: { postData: PostData }) => {
 
 export default Article;
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetStaticProps = async ({ params }) => {
   const { data } = await axios.get<PostsType>(
     `${apiRoutes.ALL_POSTS}${params?.id}?populate=*`
   );
@@ -93,18 +93,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       postData: data.data,
     },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const { data } = await axios.get<PostsType>(apiRoutes.ALL_POSTS);
-
-  const paths = data?.data.map((item) => {
-    return { params: { id: item.id.toString() } };
-  });
-
-  return {
-    paths,
-    fallback: false,
   };
 };

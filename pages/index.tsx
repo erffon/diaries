@@ -49,29 +49,26 @@ export default function Home({
           </h2>
           <ul>
             {status === 200 &&
-              (searched.length != 0 ? searched : POSTS)
-                .reverse()
-                .slice(0, 3)
-                .map((item) => {
-                  return (
-                    <li key={item?.id} className="border-b pb-7 px-3">
-                      <Link href={`${Routes.HOME}post/${item?.id}`}>
-                        <h3 className="font-semibold my-2 text-neutral-600">
-                          {item?.attributes?.title}
-                        </h3>
-                        <p className="mb-3 text-neutral-500 font-light text-sm">
-                          {item?.attributes?.description.substring(0, 200)}
-                        </p>
-                      </Link>
-                      <div className="flex items-center gap-3">
-                        <BiPurchaseTagAlt className="text-neutral-400" />
-                        <button className={style.tags}>
-                          {item?.attributes?.tag}
-                        </button>
-                      </div>
-                    </li>
-                  );
-                })}
+              (searched.length != 0 ? searched : POSTS).map((item) => {
+                return (
+                  <li key={item?.id} className="border-b pb-7 px-3">
+                    <Link href={`${Routes.HOME}post/${item?.id}`}>
+                      <h3 className="font-semibold my-2 text-neutral-600">
+                        {item?.attributes?.title}
+                      </h3>
+                      <p className="mb-3 text-neutral-500 font-light text-sm">
+                        {item?.attributes?.description.substring(0, 200)}
+                      </p>
+                    </Link>
+                    <div className="flex items-center gap-3">
+                      <BiPurchaseTagAlt className="text-neutral-400" />
+                      <button className={style.tags}>
+                        {item?.attributes?.tag}
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
           </ul>
         </main>
         <aside className="w-1/3">
@@ -113,7 +110,9 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  let { data, status } = await axios.get<PostsType>(apiRoutes.ALL_POSTS);
+  let { data, status } = await axios.get<PostsType>(
+    `${apiRoutes.ALL_POSTS}?sort=publishedAt:DESC&pagination[limit]=3`
+  );
   let { data: catData } = await axios.get<AllCatType>(apiRoutes.ALL_CATEGORIES);
 
   return {
@@ -122,6 +121,6 @@ export const getStaticProps: GetStaticProps = async () => {
       status,
       catData,
     },
-    revalidate: 600,
+    revalidate: 60,
   };
 };
