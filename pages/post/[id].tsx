@@ -1,13 +1,13 @@
 import Header from "@/features/Header";
 import style from "./Post.module.css";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import axios from "axios";
 import { apiRoutes } from "@/constants/api-routes";
 import { PostsType } from "@/interfaces/posts";
 import MarkdownIt from "markdown-it";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import { useEffect, useState } from "react";
-import { SinglePostType } from "@/interfaces/singlePost";
+import * as shamsi from "shamsi-date-converter";
 
 interface PostData {
   id: number;
@@ -57,7 +57,7 @@ const Article = ({ postData }: { postData: PostData }) => {
 
   const postRawTime = postData?.attributes?.updatedAt.toString();
   const time = new Date(postRawTime);
-  const releaseTime = `${time.getDay()} ${monthNames[time.getMonth()]}`;
+  const releaseTime = shamsi.gregorianToJalali(time).join("/");
 
   return (
     <>

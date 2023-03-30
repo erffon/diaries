@@ -2170,6 +2170,18 @@ semver@^7.3.7:
   dependencies:
     lru-cache "^6.0.0"
 
+shamsi-date-converter@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/shamsi-date-converter/-/shamsi-date-converter-1.0.5.tgz#625dee6129ab9137220af2d2d2794b356826104d"
+  integrity sha512-Ip8E6WkSs7aa1Uud9jTuMpegIFU/9mOQBli6tTriBaaYU2ckuzXxZuJus24XtmW5EkXY7tieFBpsrAPD9N2nLQ==
+  dependencies:
+    shamsi "^1.1.6"
+
+shamsi@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/shamsi/-/shamsi-1.1.6.tgz#9f08b3d8974d3990cdd6987a9ff9f7da88198b80"
+  integrity sha512-lTXsWGlPxY+AdkcoCJdwy4cFlqeULk0uPEBx+Mh7QIYEyfc+oPRFiChoxDHU3t2F2sL5J8gDJ6moD5sunOrWpg==
+
 shebang-command@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/shebang-command/-/shebang-command-2.0.0.tgz"
