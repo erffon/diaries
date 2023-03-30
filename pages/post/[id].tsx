@@ -68,7 +68,14 @@ const Article = ({ postData }: { postData: PostData }) => {
           <ul className="flex items-center gap-3 bg-neutral-100 px-3 py-1 rounded-lg text-sm text-neutral-400">
             <BiPurchaseTagAlt />
             {postData?.attributes?.categories?.data.map((item) => {
-              return <li>{item?.attributes?.name}</li>;
+              return (
+                <li
+                  className="hover:cursor-pointer hover:font-bold hover:text-neutral-700 transition-all duration-300 ease-out"
+                  key={item?.id}
+                >
+                  {item?.attributes?.name}
+                </li>
+              );
             })}
           </ul>
           <p className="text-neutral-400 text-sm bg-neutral-100 px-3 py-1 rounded-lg">

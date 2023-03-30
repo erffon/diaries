@@ -24,7 +24,7 @@ export interface Categories {
 }
 export interface Datumm {
   id: number;
-  category_attributes: DatummAttributes;
+  attributes: DatummAttributes;
 }
 
 export interface DatummAttributes {

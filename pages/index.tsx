@@ -11,7 +11,7 @@ import Link from "next/link";
 import { Routes } from "@/constants/app-routes";
 import { AllCatType } from "@/interfaces/categories";
 import { TbCategory2, TbInputSearch } from "react-icons/tb";
-import { ChangeEvent, EventHandler, useState } from "react";
+import { useState } from "react";
 
 export default function Home({
   data: { data: POSTS },
@@ -62,9 +62,18 @@ export default function Home({
                     </Link>
                     <div className="flex items-center gap-3">
                       <BiPurchaseTagAlt className="text-neutral-400" />
-                      <button className={style.tags}>
-                        {item?.attributes?.tag}
-                      </button>
+                      <ul className={style.tags}>
+                        {item?.attributes?.categories?.data.map((item) => {
+                          return (
+                            <li
+                              key={item.id}
+                              className="hover:cursor-pointer hover:font-bold hover:text-neutral-700 transition-all duration-300 ease-out"
+                            >
+                              {item?.attributes?.name}
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </div>
                   </li>
                 );
@@ -111,7 +120,7 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async () => {
   let { data, status } = await axios.get<PostsType>(
-    `${apiRoutes.ALL_POSTS}?sort=publishedAt:DESC&pagination[limit]=3`
+    `${apiRoutes.ALL_POSTS}?sort=publishedAt:DESC&pagination[limit]=3&populate=*`
   );
   let { data: catData } = await axios.get<AllCatType>(apiRoutes.ALL_CATEGORIES);
 
