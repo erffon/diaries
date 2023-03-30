@@ -7,6 +7,7 @@ import { PostsType } from "@/interfaces/posts";
 import MarkdownIt from "markdown-it";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import { useEffect, useState } from "react";
+import { SinglePostType } from "@/interfaces/singlePost";
 
 interface PostData {
   id: number;
@@ -19,13 +20,15 @@ interface PostData {
     updatedAt: Date;
     publishedAt: Date;
     categories: {
-      id: number;
-      category_attributes: {
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
-        publishedAt: Date;
-      };
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          createdAt: Date;
+          updatedAt: Date;
+          publishedAt: Date;
+        };
+      }[];
     };
   };
 }
@@ -48,16 +51,13 @@ const Article = ({ postData }: { postData: PostData }) => {
   const [postDesc, setPostDesc] = useState("");
   useEffect(() => {
     const md = new MarkdownIt();
-    const postDescription = md.render(postData?.attributes?.description);
+    const postDescription = md.render(`${postData?.attributes?.description}`);
     setPostDesc(postDescription);
   }, []);
 
   const postRawTime = postData?.attributes?.updatedAt.toString();
   const time = new Date(postRawTime);
-  const releaseTime = `${time.getDay()} ${monthNames[time.getMonth()].slice(
-    0,
-    3
-  )} ${time.getFullYear()}`;
+  const releaseTime = `${time.getDay()} ${monthNames[time.getMonth()]}`;
 
   return (
     <>
@@ -65,10 +65,12 @@ const Article = ({ postData }: { postData: PostData }) => {
       <main className="font-salel h-screen">
         <h2 className={style.title}>{postData?.attributes?.title}</h2>
         <div className={style["post-metadata"]}>
-          <button className="flex items-center gap-2 bg-neutral-100 px-3 py-1 rounded-lg text-sm text-neutral-400">
+          <ul className="flex items-center gap-3 bg-neutral-100 px-3 py-1 rounded-lg text-sm text-neutral-400">
             <BiPurchaseTagAlt />
-            {postData?.attributes?.tag}
-          </button>
+            {postData?.attributes?.categories?.data.map((item) => {
+              return <li>{item?.attributes?.name}</li>;
+            })}
+          </ul>
           <p className="text-neutral-400 text-sm bg-neutral-100 px-3 py-1 rounded-lg">
             {releaseTime}
           </p>
