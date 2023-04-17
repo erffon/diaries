@@ -17,8 +17,22 @@ export interface Attributes {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
+  categories: Categories;
+}
+export interface Categories {
+  data: Datumm[];
+}
+export interface Datumm {
+  id: number;
+  attributes: DatummAttributes;
 }
 
+export interface DatummAttributes {
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date;
+}
 export interface Meta {
   pagination: Pagination;
 }

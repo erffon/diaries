@@ -1,5 +1,5 @@
 .tags {
-  @apply text-xs bg-neutral-200 hover:bg-neutral-300 text-neutral-700 hover:text-neutral-900 transition duration-300 ease-out hover:scale-95 rounded-md px-4 py-1;
+  @apply text-xs bg-neutral-200 text-neutral-700  rounded-md px-4 py-1 flex gap-3 items-center;
 }
 .cat-buttons {
   @apply bg-slate-50 hover:bg-slate-100 border-2 hover:border-slate-700 text-neutral-500 hover:font-semibold hover:text-neutral-600 w-16 h-16 mb-4 rounded-xl transition-all duration-300 ease-out;

@@ -1,3 +1,15 @@
 .title {
-  @apply font-bold text-xl text-center text-cyan-600 bg-slate-200 mx-10 rounded-xl py-5 mb-10;
+  @apply font-bold text-xl text-center text-cyan-600 bg-slate-200 mx-10 rounded-xl py-5 mb-5;
+}
+.posts-container {
+  @apply mx-10 pb-10;
+}
+.posts-container li {
+  @apply border-2 px-3 py-5 mb-4 rounded-lg;
+}
+.posts-container li h3 {
+  @apply font-semibold text-neutral-600 mb-2;
+}
+.posts-container li p {
+  @apply text-neutral-500 text-sm;
 }
